@@ -1,0 +1,13 @@
+spring:
+  mvc:
+    favicon:
+      enabled: true
+    date-format: yyyy-MM-dd
+  datasource:
+    url: jdbc:mysql://localhost:3306/tracking
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    schema: tracking.sql
+mybatis:
+  config-location: classpath:mybatis-config.xml

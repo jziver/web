@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CompanyMapper">
+
+    <resultMap id="companyRM" type="Company">
+        <id column="id" property="id"/>
+        <result column="company_name" property="companyname"/>
+        <result column="address" property="adderss"/>
+        <result column="telephone" property="telephone"/>
+    </resultMap>
+
+
+    <insert id="insertCompany" >
+        INSERT INTO company(company_name,address,telephone)
+        VALUES(#{companyname},#{address},#{telephone})
+    </insert>
+
+
+</mapper>

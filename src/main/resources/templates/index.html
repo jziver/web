@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>毕业生跟踪回访系统</title>
+    <th:block th:include="component :: #head"></th:block>
+</head>
+<body>
+<th:block th:include="component :: #header">
+</th:block>
+
+<div class="center" style="text-align:center;background-color:#00b6ae;padding: 100px 0;color: #fff;">
+    <div class="am-g">
+        <div class="am-u-lg-12">
+            <h1 class="center-title">Amaze UI - HTML5 跨屏前端框架</h1>
+
+            <p>
+                期待你的参与，共同打造一个简单易用的前端框架
+            </p>
+
+            <p>
+                <a th:href="@{/inputCompany}" class="am-btn am-btn-primary am-btn-xl center-btn ">企业入口</a>
+                <a href="http://amazeui.org" class="am-btn am-btn-danger am-btn-xl center-btn ">毕业生入口</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<footer th:include="component :: #footer" class="footer">
+</footer>
+
+<th:block th:include="component :: #script"></th:block>
+
+</body>
+</html>

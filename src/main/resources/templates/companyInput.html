@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>企业信息录入</title>
+    <th:block th:include="component :: #head"></th:block>
+    <style type="text/css">
+
+        .header h1 {
+            font-size: 200%;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .header p {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="am-g am-text-center">
+        <h1>Web ide</h1>
+        <p>Integrated Development Environment<br />代码编辑，代码生成，界面设计，调试，编译</p>
+    </div>
+    <hr />
+</div>
+
+<div class="am-g">
+    <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+
+        <form method="post" th:action="@{/inputCompany}" class="am-form">
+            <label for="username">帐号:</label>
+            <input type="text" name="username" id="username" value="" placeholder="登录帐号(6~12位字母数字下划线组成)"/>
+            <br/>
+            <label for="password">密码:</label>
+            <input type="password" name="password" id="password" value="" placeholder="密码(6~12位任意字符)"/>
+            <br/>
+            <label for="companyname">公司名称:</label>
+            <input type="text" name="companyname" id="companyname" value="" placeholder="请输入您的公司名称"/>
+            <br/>
+            <label for="address">公司地址:</label>
+            <input type="text" name="address" id="address" value="" placeholder="请输入您公司的地址"/>
+            <br/>
+            <label for="telephone">联系电话:</label>
+            <input type="tel" name="telephone" id="telephone" value="" placeholder="请输入您公司的联系方式"/>
+            <br/>
+            <div class="am-cf">
+                <button type="submit" name="" class="am-btn am-btn-primary am-btn-sm am-fl">提交</button>
+                <a name="" class="am-btn am-btn-danger am-btn-sm am-fr" th:href="@{/login}">已经注册?现在登录</a>
+            </div>
+        </form>
+        <hr/>
+        <p>© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+    </div>
+</div>
+
+
+
+<th:block th:include="component :: #script"></th:block>
+</body>
+</html>

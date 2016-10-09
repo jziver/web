@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserMapper">
+
+
+    <resultMap id="UserRM" type="User">
+        <id column="uid" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+    </resultMap>
+    <resultMap id="UserRoleRM" type="User" extends="UserRM">
+        <collection property="roles" ofType="Role">
+            <id column="rid" property="id"/>
+            <id column="rname" property="name"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="RoleRM" type="Role">
+
+    </resultMap>
+
+
+    <select id="findByUserName" parameterType="java.lang.String" resultMap="UserRoleRM">
+        SELECT u.id as uid,u.username,u.password,r.rid as rid,r.rname as rname
+        FROM users u
+        LEFT JOIN user_role ur ON u.id = ur.user_id
+        LEFT JOIN roles r ON ur.role_id = r.rid
+        WHERE u.username = #{username}
+    </select>
+
+
+    <insert id="insertUser">
+        INSERT INTO users(username,password)
+        VALUES (#{username},#{password})
+    </insert>
+
+    <insert id="insertCompanyRole" parameterType="java.lang.String">
+        INSERT INTO user_role(user_id,role_id)
+        VALUES ((SELECT u.id FROM users u WHERE u.username=#{username}),'3')
+    </insert>
+
+    <insert id="insertGraduateRole" parameterType="java.lang.String">
+        INSERT INTO user_role(user_id,role_id)
+        VALUES ((SELECT u.id FROM users u WHERE u.username=#{username}),'4')
+    </insert>
+
+</mapper>

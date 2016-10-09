@@ -1,0 +1,25 @@
+.center {
+    background: url("/img/bg-square.png");
+    background-repeat: repeat;
+
+}
+.center-title{
+    display: inline-block;
+    padding: 20px;
+    background-color: #00b6ae;
+    background-color:rgba(0,0,0,0.2);
+    font-size: 200%;
+}
+.center-btn{
+    width: 180px;
+}
+
+
+.footer p {
+    color: #7f8c8d;
+    margin: 0;
+    padding: 15px 0;
+    text-align: center;
+    background: #2d3e50;
+
+}
