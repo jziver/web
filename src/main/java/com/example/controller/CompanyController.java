@@ -34,6 +34,7 @@ public class CompanyController {
     @RequestMapping(value = "/inputCompany",method = RequestMethod.POST)
     public String inputCompany(@Valid User user, Errors userErrors, Company company){
         if(userErrors.hasErrors()){
+
             return "companyInput";
         }
         userService.addCompanyUser(user);

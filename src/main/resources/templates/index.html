@@ -9,10 +9,10 @@
 <th:block th:include="component :: #header">
 </th:block>
 
-<div class="center" style="text-align:center;background-color:#00b6ae;padding: 100px 0;color: #fff;">
-    <div class="am-g">
+<div sec:authorize="isAnonymous()" class="center" style="text-align:center;background-color:#00b6ae;padding: 100px 0;color: #fff;">
+    <div class="am-g" >
         <div class="am-u-lg-12">
-            <h1 sec:authorize="isAuthenticated()" class="center-title">Amaze UI - HTML5 跨屏前端框架</h1>
+            <h1 class="center-title">Amaze UI - HTML5 跨屏前端框架</h1>
 
             <p>
                 期待你的参与，共同打造一个简单易用的前端框架
@@ -24,12 +24,57 @@
             </p>
         </div>
     </div>
+
+
+
+
 </div>
 
+<div class="am-container" style="margin-top: 1.5em" sec:authorize="isAuthenticated()">
+    <div class="am-fl" style="width: 26%;margin-right: 1rem">
+        <section class="am-panel am-panel-default">
+            <header class="am-panel-hd">
+                <h3 class="am-panel-title">面板标题</h3>
+            </header>
+            <div class="am-panel-bd">
+                面板内容
+            </div>
+        </section>
+
+    </div>
+    <div class="am-fr" style="width: 70%">
+        <ul class="am-list am-list-static am-list-border">
+
+            <li>
+                <span class="am-badge">5天前</span>
+                <span class="am-badge am-badge-danger">推荐</span>
+                每个人都有一个死角， 自己走不出来，别人也闯不进去。
+            </li>
+            <li>
+                <span class="am-badge">5天前</span>
+                每个人都有一个死角， 自己走不出来，别人也闯不进去。
+            </li>
+
+
+        </ul>
+
+        <ul class="am-pagination am-pagination-centered">
+            <li class="am-disabled"><a href="#">&laquo;</a></li>
+            <li class="am-active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+
+<th:block th:include="component :: #script"></th:block>
 <footer th:include="component :: #footer" class="footer">
 </footer>
 
-<th:block th:include="component :: #script"></th:block>
+
 
 </body>
 </html>

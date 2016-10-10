@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html  lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head id="head">
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -27,31 +27,35 @@
         <div class="am-collapse am-topbar-collapse" id="collapse-head">
             <ul class="am-nav am-nav-pills am-topbar-nav">
                 <li class="am-active"><a th:href="@{/}">首页</a></li>
+                <li><a  href="#">发现</a></li>
 
-                <li class="am-dropdown" data-am-dropdown="">
+                <li class="am-dropdown" data-am-dropdown="" sec:authorize="isAuthenticated()">
                     <a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;">
                         我的 <span class="am-icon-caret-down"></span>
                     </a>
                     <ul class="am-dropdown-content">
-                        <li class="am-dropdown-header">操作</li>
-                        <li><a th:href="@{/admin}">后台管理</a></li>
-                        <li><a href="#">企业基本信息</a></li>
-                        <li><a href="#">发布招聘</a></li>
-                        <li><a href="#">毕业生基本信息</a></li>
-                        <li><a href="#">编辑简历</a></li>
+                        <!--<li class="am-dropdown-header">标题</li>-->
+                        <li sec:authorize="hasAnyRole('SU','ADMIN')"><a th:href="@{/admin}">后台管理</a></li>
+                        <li sec:authorize="hasRole('COM')"><a href="#">企业基本信息</a></li>
+                        <li sec:authorize="hasRole('COM')"><a href="#">发布招聘</a></li>
+                        <li sec:authorize="hasRole('GDE')"><a href="#">毕业生基本信息</a></li>
+                        <li sec:authorize="hasRole('GDE')"><a href="#">编辑简历</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">注销</a></li>
 
                     </ul>
                 </li>
                 <li><a href="#">关于</a></li>
             </ul>
+            <div sec:authorize="isAnonymous()">
+                <div class="am-topbar-right">
+                    <button class="am-btn am-btn-danger am-topbar-btn am-btn-sm  am-disabled"><span class="am-icon-pencil"></span> 注册</button>
+                </div>
 
-            <div class="am-topbar-right">
-                <button class="am-btn am-btn-danger am-topbar-btn am-btn-sm  am-disabled"><span class="am-icon-pencil"></span> 注册</button>
+                <div class="am-topbar-right">
+                    <a th:href="@{/login}" class="am-btn am-btn-primary am-topbar-btn am-btn-sm "><span class="am-icon-user"></span> 登录</a>
+                </div>
             </div>
 
-            <div class="am-topbar-right">
-                <a th:href="@{/login}" class="am-btn am-btn-primary am-topbar-btn am-btn-sm "><span class="am-icon-user"></span> 登录</a>
-            </div>
         </div>
     </div>
 </header>
