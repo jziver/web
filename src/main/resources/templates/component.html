@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html  lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head id="head">
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -50,7 +50,7 @@
             </div>
 
             <div class="am-topbar-right">
-                <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm "><span class="am-icon-user"></span> 登录</button>
+                <a th:href="@{/login}" class="am-btn am-btn-primary am-topbar-btn am-btn-sm "><span class="am-icon-user"></span> 登录</a>
             </div>
         </div>
     </div>

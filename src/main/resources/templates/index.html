@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>毕业生跟踪回访系统</title>
     <th:block th:include="component :: #head"></th:block>
@@ -11,7 +12,7 @@
 <div class="center" style="text-align:center;background-color:#00b6ae;padding: 100px 0;color: #fff;">
     <div class="am-g">
         <div class="am-u-lg-12">
-            <h1 class="center-title">Amaze UI - HTML5 跨屏前端框架</h1>
+            <h1 sec:authorize="isAuthenticated()" class="center-title">Amaze UI - HTML5 跨屏前端框架</h1>
 
             <p>
                 期待你的参与，共同打造一个简单易用的前端框架

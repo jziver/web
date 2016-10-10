@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.dialect.SpringStandardDialect;
+import org.thymeleaf.templateresolver.TemplateResolver;
 
 
 @Configuration
@@ -27,6 +30,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
             container.addErrorPages(error404);
         });
     }
+
+
 
 
 }

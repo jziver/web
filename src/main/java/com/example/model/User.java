@@ -19,7 +19,7 @@ public class User implements UserDetails {
     private static final long serialVersionUID = -8267826287422203700L;
     private Long id;
     @NotEmpty(message = "用户名不能为空")
-    @Pattern(regexp = "/^[\\w]{6,12}$/",message = "用户名必须为6~12位字母数字下划线")
+    @Pattern(regexp = "[\\w]{6,12}",message = "用户名必须为6~12位字母数字下划线")
     private String username;
     @NotEmpty(message = "密码不能为空")
     @Size(min = 6,max = 12,message = "密码为6~12任意字符")
