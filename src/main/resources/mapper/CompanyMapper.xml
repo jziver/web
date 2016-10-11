@@ -7,10 +7,14 @@
     <resultMap id="companyRM" type="Company">
         <id column="id" property="id"/>
         <result column="company_name" property="companyname"/>
-        <result column="address" property="adderss"/>
+        <result column="address" property="address"/>
         <result column="telephone" property="telephone"/>
     </resultMap>
 
+
+    <select id="findAll" resultMap="companyRM">
+    SELECT * FROM company
+</select>
 
     <insert id="insertCompany" >
         INSERT INTO company(company_name,address,telephone)

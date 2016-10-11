@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+>
+<head id="head">
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="renderer" content="webkit"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+    <link rel="stylesheet" th:href="@{/css/amazeui.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mystyle.css}"/>
+</head>
+<body>
+<div id="home">home</div>
+<div id="addUser">
+    <div class="admin-content-body">
+        <div class="am-cf am-padding am-padding-bottom-0">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-lg">用户管理</strong> /
+                <small>添加用户</small>
+            </div>
+        </div>
+
+        <hr/>
+
+        <div class="am-tabs am-margin" data-am-tabs="">
+            <ul class="am-tabs-nav am-nav am-nav-tabs">
+                <li sec:authorize="hasRole('SU')" class="am-active"><a href="#tab1">添加管理员</a></li>
+                <li><a href="#tab2">添加企业用户</a></li>
+                <li><a href="#tab3">添加毕业生</a></li>
+            </ul>
+
+
+            <div class="am-tabs-bd">
+                <div sec:authorize="hasRole('SU')" class="am-tab-panel am-fade am-in am-active" id="tab1">
+                    <form class="am-form">
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                管理员帐号
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <input type="text" class="am-input-sm"/>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*必填，不可重复(4~12位数字字母下划线)</div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                管理员密码
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <input type="text" class="am-input-sm"/>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*必填，不可重复(6~18位任意字符)</div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                确认密码
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <input type="text" class="am-input-sm"/>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*与输入密码一致</div>
+                        </div>
+
+
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                &nbsp;
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <button class="am-btn am-btn-primary am-btn-xs" type="submit">提交保存</button>
+                                <button class="am-btn am-btn-warning am-btn-xs am-fr" type="reset">重置表单</button>
+                            </div>
+                            <div class="am-u-sm-12 am-u-md-6">&nbsp;</div>
+                        </div>
+
+
+                    </form>
+                </div>
+
+                <div class="am-tab-panel am-fade" id="tab2">
+                    <form class="am-form">
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                企业帐号
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <input type="text" class="am-input-sm"/>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*必填，不可重复(4~12位数字字母下划线)</div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                密码
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <input type="text" class="am-input-sm"/>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*必填，不可重复(6~18位任意字符)</div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                确认密码
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <input type="text" class="am-input-sm"/>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*与输入密码一致</div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                企业名称
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <input type="text" class="am-input-sm"/>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*必填，不可重复</div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                企业地址
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <input type="text" class="am-input-sm"/>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*必填，不可重复</div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                联系方式
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <input type="text" class="am-input-sm"/>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*必填，不可重复</div>
+                        </div>
+
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                &nbsp;
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <button class="am-btn am-btn-primary am-btn-xs" type="submit">提交保存</button>
+                                <button class="am-btn am-btn-warning am-btn-xs am-fr" type="reset">重置表单</button>
+                            </div>
+                            <div class="am-u-sm-12 am-u-md-6">&nbsp;</div>
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="am-tab-panel am-fade" id="tab3">
+                    <form class="am-form">
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                毕业生帐号
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <input type="text" class="am-input-sm"/>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*必填，不可重复(4~12位数字字母下划线)</div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                密码
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <input type="text" class="am-input-sm"/>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*必填，不可重复(6~18位任意字符)</div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                确认密码
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <input type="text" class="am-input-sm"/>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*与输入密码一致</div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                毕业生姓名
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <input type="text" class="am-input-sm"/>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*必填，不可重复</div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                毕业生性别
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <label class="am-radio-inline">
+                                    <input type="radio" name="radio10" value="male" data-am-ucheck=""/> 男
+                                </label>
+                                <label class="am-radio-inline">
+                                    <input type="radio" name="radio10" value="female" data-am-ucheck=""/> 女
+                                </label>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*必选，不可重复</div>
+                        </div>
+
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                专业
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <select data-am-selected="{searchBox: 1,maxHeight: 135}">
+                                    <!-- dropUp: 1 向上下拉框 -->
+                                    <option value="a">Apple</option>
+                                    <option value="b">Banana</option>
+                                    <option value="o">Orange</option>
+                                    <option value="m">Mango</option>
+                                    <option value="phone">iPhone</option>
+                                    <option value="im">iMac</option>
+                                    <option value="mbp">Macbook Pro</option>
+                                </select>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*必选，不可重复</div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                班级
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <input type="text" class="am-input-sm"/>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*必填，不可重复</div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                手机号
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <input type="tel" class="am-input-sm"/>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*必填，不可重复</div>
+                        </div>
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                备注
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <textarea rows="4"></textarea>
+                            </div>
+                            <div class="am-hide-sm-only am-u-md-6">*选填</div>
+                        </div>
+
+                        <div class="am-g am-margin-top">
+                            <div class="am-u-sm-4 am-u-md-2 am-text-right">
+                                &nbsp;
+                            </div>
+                            <div class="am-u-sm-8 am-u-md-4">
+                                <button class="am-btn am-btn-primary am-btn-xs" type="submit">提交保存</button>
+                                <button class="am-btn am-btn-warning am-btn-xs am-fr" type="reset">重置表单</button>
+                            </div>
+                            <div class="am-u-sm-12 am-u-md-6">&nbsp;</div>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#user-nav").addClass("am-in");
+        });
+    </script>
+</div>
+
+<div id="userList">
+    <div class="am-cf am-padding am-padding-bottom-0">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">表格</strong> /
+            <small>Table</small>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-3 am-fr">
+            <div class="am-input-group am-input-group-sm">
+                <input type="text" class="am-form-field"/>
+                <span class="am-input-group-btn">
+            <button class="am-btn am-btn-default" type="button">搜索</button>
+          </span>
+            </div>
+        </div>
+    </div>
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <form class="am-form">
+                <table class="am-table am-table-striped am-table-hover table-main">
+                    <thead>
+                    <tr>
+                        <th class="table-check"><input type="checkbox"/></th>
+                        <th class="table-id">ID</th>
+                        <th class="table-title">用户名</th>
+                        <th class="table-type">角色</th>
+                        <th class="table-date am-hide-sm-only">创建日期</th>
+                        <th class="table-set">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="u : ${users}">
+
+                        <th:block sec:authorize="hasRole('SU')">
+                            <td><input type="checkbox"/></td>
+                            <td th:text="${u.id}"></td>
+                            <td th:text="${u.username}"></td>
+                            <td th:each="r : ${u.roles}"><span class="am-badge" th:text="${r.name}"></span></td>
+                            <td class="am-hide-sm-only"
+                                th:text="${#dates.format(u.createTime,'yyyy年MM月dd日 hh:mm:ss')}"></td>
+                            <td>
+                                <div class="am-btn-toolbar">
+                                    <div class="am-btn-group am-btn-group-xs">
+                                        <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                                class="am-icon-pencil-square-o"></span> 编辑
+                                        </button>
+                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                                class="am-icon-trash-o"></span> 删除
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>
+                        </th:block>
+                        <th:block sec:authorize="hasRole('ADMIN')" th:each="role : ${u.roles}">
+                            <div th:if="not(${role.name eq 'ROLE_SU'} or ${role.name eq 'ROLE_ADMIN'})">
+                                <td><input type="checkbox"/></td>
+                                <td th:text="${u.id}"></td>
+                                <td th:text="${u.username}"></td>
+                                <td th:each="r : ${u.roles}"><span class="am-badge" th:text="${r.name}"></span></td>
+                                <td class="am-hide-sm-only"
+                                    th:text="${#dates.format(u.createTime,'yyyy年MM月dd日 hh:mm:ss')}"></td>
+                                <td>
+                                    <div class="am-btn-toolbar">
+                                        <div class="am-btn-group am-btn-group-xs">
+                                            <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                                    class="am-icon-pencil-square-o"></span> 编辑
+                                            </button>
+                                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                                    class="am-icon-trash-o"></span> 删除
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </div>
+                        </th:block>
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#user-nav").addClass("am-in");
+        });
+    </script>
+</div>
+
+<div id="coms">
+    <div class="am-cf am-padding am-padding-bottom-0">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">表格</strong> /
+            <small>Table</small>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="am-u-sm-12 am-u-md-3 am-fr">
+            <div class="am-input-group am-input-group-sm">
+                <input type="text" class="am-form-field"/>
+                <span class="am-input-group-btn">
+                  <button class="am-btn am-btn-default" type="button">搜索</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="am-u-sm-12">
+        <form class="am-form">
+            <table class="am-table am-table-striped am-table-hover table-main">
+                <thead>
+                <tr>
+                    <th class="table-check"><input type="checkbox"/></th>
+                    <th class="table-id">ID</th>
+                    <th class="table-title">标题</th>
+                    <th class="table-type">类别</th>
+                    <th class="table-author am-hide-sm-only">作者</th>
+                    <th class="table-date am-hide-sm-only">修改日期</th>
+                    <th class="table-set">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><input type="checkbox"/></td>
+                    <td>1</td>
+                    <td><a href="#">Business management</a></td>
+                    <td>default</td>
+                    <td class="am-hide-sm-only">测试1号</td>
+                    <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
+                    <td>
+                        <div class="am-btn-toolbar">
+                            <div class="am-btn-group am-btn-group-xs">
+                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                        class="am-icon-pencil-square-o"></span> 编辑
+                                </button>
+                                <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
+                                        class="am-icon-copy"></span> 复制
+                                </button>
+                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                        class="am-icon-trash-o"></span> 删除
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -3,6 +3,8 @@ package com.example.mapper;
 import com.example.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
 
@@ -14,4 +16,5 @@ public interface UserMapper {
 
     void insertGraduateRole(String username);
 
+    List<User> findAll();
 }

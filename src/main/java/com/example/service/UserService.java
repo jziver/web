@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -15,7 +18,20 @@ public class UserService {
 
     @Transactional
     public void addCompanyUser(User user){
+        user.setCreateTime(new Date());
         userMapper.insertUser(user);
         userMapper.insertCompanyRole(user.getUsername());
+    }
+
+    @Transactional
+    public void addAdminUser(User user){
+        user.setCreateTime(new Date());
+        userMapper.insertUser(user);
+        userMapper.insertGraduateRole(user.getUsername());
+    }
+
+    @Transactional(readOnly = true)
+    public List<User> findAll() {
+        return userMapper.findAll();
     }
 }

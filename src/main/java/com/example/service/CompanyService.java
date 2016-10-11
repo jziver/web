@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class CompanyService {
 
@@ -19,6 +21,11 @@ public class CompanyService {
     @Transactional
     public void insertCompany(Company company){
         companyMapper.insertCompany(company);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Company> findAll(){
+        return companyMapper.findAll();
     }
 
 }

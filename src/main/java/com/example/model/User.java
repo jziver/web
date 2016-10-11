@@ -9,6 +9,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +25,9 @@ public class User implements UserDetails {
     @NotEmpty(message = "密码不能为空")
     @Size(min = 6,max = 18,message = "密码为6~18任意字符")
     private String password;
+
+    private Date createTime;
+
     private List<Role> roles;
 
     @Override
@@ -88,12 +92,21 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", createTime=" + createTime +
                 ", roles=" + roles +
                 '}';
     }

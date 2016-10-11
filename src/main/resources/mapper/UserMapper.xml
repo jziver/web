@@ -9,6 +9,7 @@
         <id column="uid" property="id"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>
+        <result column="create_time" property="createTime"/>
     </resultMap>
     <resultMap id="UserRoleRM" type="User" extends="UserRM">
         <collection property="roles" ofType="Role">
@@ -30,6 +31,13 @@
         WHERE u.username = #{username}
     </select>
 
+
+    <select id="findAll" resultMap="UserRoleRM">
+        SELECT u.id as uid,u.username,u.password,u.create_time,r.rid as rid,r.rname as rname
+        FROM users u
+        LEFT JOIN user_role ur ON u.id = ur.user_id
+        LEFT JOIN roles r ON ur.role_id = r.rid
+    </select>
 
     <insert id="insertUser">
         INSERT INTO users(username,password)

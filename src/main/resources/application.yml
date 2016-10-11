@@ -2,7 +2,7 @@ spring:
   mvc:
     favicon:
       enabled: true
-    date-format: yyyy-MM-dd
+    date-format: yyyy/MM/dd hh:mm:ss
   datasource:
     url: jdbc:mysql://localhost:3306/tracking
     driver-class-name: com.mysql.jdbc.Driver
