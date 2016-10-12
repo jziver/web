@@ -15,7 +15,11 @@
     <link rel="stylesheet" th:href="@{/css/mystyle.css}"/>
 </head>
 <body>
-<div id="home">home</div>
+<div id="home">
+    <span class="am-text-center">后头首页<br/>制作中...</span>
+</div>
+
+<!-- 添加用户页面 -->
 <div id="addUser">
     <div class="admin-content-body">
         <div class="am-cf am-padding am-padding-bottom-0">
@@ -210,16 +214,10 @@
                             <div class="am-u-sm-4 am-u-md-2 am-text-right">
                                 专业
                             </div>
-                            <div class="am-u-sm-8 am-u-md-4">
+                            <div class="am-u-sm-8 am-u-md-4" >
                                 <select data-am-selected="{searchBox: 1,maxHeight: 135}">
                                     <!-- dropUp: 1 向上下拉框 -->
-                                    <option value="a">Apple</option>
-                                    <option value="b">Banana</option>
-                                    <option value="o">Orange</option>
-                                    <option value="m">Mango</option>
-                                    <option value="phone">iPhone</option>
-                                    <option value="im">iMac</option>
-                                    <option value="mbp">Macbook Pro</option>
+                                    <option th:each="mj : ${majors}" th:value="${mj.id}" th:text="${mj.name}"></option>
                                 </select>
                             </div>
                             <div class="am-hide-sm-only am-u-md-6">*必选，不可重复</div>
@@ -276,7 +274,7 @@
         });
     </script>
 </div>
-
+<!--用户列表页面-->
 <div id="userList">
     <div class="am-cf am-padding am-padding-bottom-0">
         <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">表格</strong> /
@@ -326,9 +324,9 @@
                                         <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
                                                 class="am-icon-pencil-square-o"></span> 编辑
                                         </button>
-                                        <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                        <a href="javascript:;" class="delete am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                                 class="am-icon-trash-o"></span> 删除
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </td>
@@ -358,21 +356,41 @@
                     </tr>
                     </tbody>
                 </table>
+                <div class="am-cf">
+                    <span th:text="'共' + ${#lists.size(users)} + '条记录'"></span>
+                    <ul class="am-pagination am-pagination-centered">
+                        <li class="am-disabled"><a href="#">«</a></li>
+                        <li class="am-active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">»</a></li>
+                    </ul>
+                </div>
             </form>
         </div>
     </div>
 
     <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/layer.js}"></script>
     <script type="text/javascript">
         $(function () {
             $("#user-nav").addClass("am-in");
+            $(".delete").click(function(){
+                layer.confirm('确认要删除吗?', {icon: 3, title:'提示'}, function(delconfirm){
+                    //do something
+
+                    layer.close(delconfirm);
+                });
+            });
         });
     </script>
 </div>
-
+<!--公司列表页面-->
 <div id="coms">
     <div class="am-cf am-padding am-padding-bottom-0">
-        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">表格</strong> /
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">企业信息</strong> /
             <small>Table</small>
         </div>
     </div>
@@ -404,41 +422,280 @@
                 <tr>
                     <th class="table-check"><input type="checkbox"/></th>
                     <th class="table-id">ID</th>
-                    <th class="table-title">标题</th>
-                    <th class="table-type">类别</th>
-                    <th class="table-author am-hide-sm-only">作者</th>
-                    <th class="table-date am-hide-sm-only">修改日期</th>
+                    <th class="table-title">企业名称</th>
+                    <th class="table-type">地址</th>
+                    <th class="table-author am-hide-sm-only">联系方式</th>
                     <th class="table-set">操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr th:each="c : ${coms}">
                     <td><input type="checkbox"/></td>
-                    <td>1</td>
-                    <td><a href="#">Business management</a></td>
-                    <td>default</td>
-                    <td class="am-hide-sm-only">测试1号</td>
-                    <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
+                    <td th:text="${c.id}"></td>
+                    <td><a href="#" th:text="${c.companyname}"></a></td>
+                    <td th:text="${c.address}"></td>
+                    <td class="am-hide-sm-only" th:text="${c.telephone}"></td>
                     <td>
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs">
                                 <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
                                         class="am-icon-pencil-square-o"></span> 编辑
                                 </button>
-                                <button class="am-btn am-btn-default am-btn-xs am-hide-sm-only"><span
-                                        class="am-icon-copy"></span> 复制
-                                </button>
-                                <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+
+                                <a href="javascript:;" class="delete am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                         class="am-icon-trash-o"></span> 删除
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </td>
                 </tr>
                 </tbody>
             </table>
+            <div class="am-cf">
+                <span th:text="'共' + ${#lists.size(coms)} + '条记录'"></span>
+                <ul class="am-pagination am-pagination-centered">
+                    <li class="am-disabled"><a href="#">«</a></li>
+                    <li class="am-active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">»</a></li>
+                </ul>
+            </div>
         </form>
     </div>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/layer.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#company-nav").addClass("am-in");
+            $(".delete").click(function(){
+                layer.confirm('确认要删除吗?', {icon: 3, title:'提示'}, function(delconfirm){
+                    //do something
+
+                    layer.close(delconfirm);
+                });
+            });
+        });
+    </script>
+</div>
+<!-- 毕业生列表页面 -->
+<div id="graduateList">
+    <div class="am-cf am-padding am-padding-bottom-0">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">毕业生基本信息</strong> /
+            <small>Table</small>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
+                </div>
+            </div>
+        </div>
+        <div class="am-u-sm-12 am-u-md-3">
+            <div class="am-form-group">
+                <select data-am-selected="{btnSize: 'sm'}">
+                    <option value="option1">所有类别</option>
+                    <option value="option2">求职中</option>
+                    <option value="option2">求职成功</option>
+                </select>
+            </div>
+        </div>
+        <div class="am-u-sm-12 am-u-md-3 am-fr">
+            <div class="am-input-group am-input-group-sm">
+                <input type="text" class="am-form-field"/>
+                <span class="am-input-group-btn">
+                  <button class="am-btn am-btn-default" type="button">搜索</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="am-u-sm-12">
+        <form class="am-form">
+            <table class="am-table am-table-striped am-table-hover table-main">
+                <thead>
+                <tr>
+                    <th class="table-check"><input type="checkbox"/></th>
+                    <th class="table-id">ID</th>
+                    <th class="table-title">毕业生姓名</th>
+                    <th class="table-type">性别</th>
+                    <th class="table-author am-hide-sm-only">联系方式</th>
+                    <th class="table-type">专业</th>
+                    <th class="table-type">班级</th>
+                    <th class="table-type">求职状态</th>
+                    <th class="table-type">备注</th>
+                    <th class="table-set">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="gd : ${gdList}">
+                    <td><input type="checkbox"/></td>
+                    <td th:text="${gd.id}"></td>
+                    <td><a href="#" th:text="${gd.name}"></a></td>
+                    <td th:text="${gd.sex}"></td>
+                    <td class="am-hide-sm-only" th:text="${gd.phone}"></td>
+                    <td th:text="${gd.major.name}"></td>
+                    <td th:text="${gd.clazz}"></td>
+                    <td th:text="${gd.jobStatus}"></td>
+                    <td th:text="${gd.remark}"></td>
+                    <td>
+                        <div class="am-btn-toolbar">
+                            <div class="am-btn-group am-btn-group-xs">
+                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                        class="am-icon-pencil-square-o"></span> 编辑
+                                </button>
+
+                                <a href="javascript:;" class="delete am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                        class="am-icon-trash-o"></span> 删除
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="am-cf">
+                <span th:text="'共' + ${#lists.size(gdList)} + '条记录'"></span>
+                <ul class="am-pagination am-pagination-centered">
+                    <li class="am-disabled"><a href="#">«</a></li>
+                    <li class="am-active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">»</a></li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/layer.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".delete").click(function(){
+                layer.confirm('确认要删除吗?', {icon: 3, title:'提示'}, function(delconfirm){
+                    //do something
+
+                    layer.close(delconfirm);
+                });
+            });
+        });
+    </script>
+</div>
+<!--专业列表-->
+<div id="majorList">
+    <div class="am-cf am-padding am-padding-bottom-0">
+        <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">专业管理</strong> /
+            <small>Table</small>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="am-g">
+        <div class="am-u-sm-12 am-u-md-6">
+            <div class="am-btn-toolbar">
+                <div class="am-btn-group am-btn-group-xs">
+                    <button id="addMajor" type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
+                </div>
+            </div>
+        </div>
+        <div class="am-u-sm-12 am-u-md-3 am-fr">
+            <div class="am-input-group am-input-group-sm">
+                <input type="text" class="am-form-field"/>
+                <span class="am-input-group-btn">
+                  <button class="am-btn am-btn-default" type="button">搜索</button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="am-u-sm-12">
+        <form class="am-form">
+            <table class="am-table am-table-striped am-table-hover table-main">
+                <thead>
+                <tr>
+                    <th class="table-check"><input type="checkbox"/></th>
+                    <th class="table-id">ID</th>
+                    <th class="table-title">专业名称</th>
+                    <th class="table-set">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="mj : ${majorList}" th:class="|mjTr${mj.id}|">
+                    <td><input type="checkbox"/></td>
+                    <td th:text="${mj.id}"></td>
+                    <td th:text="${mj.name}"></td>
+                    <td>
+                        <div class="am-btn-toolbar">
+                            <div class="am-btn-group am-btn-group-xs">
+                                <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
+                                        class="am-icon-pencil-square-o"></span> 编辑
+                                </button>
+
+                                <a th:href="@{'delMj/' + ${mj.id}}" th:alt="${mj.id}" class="delete am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                        class="am-icon-trash-o"></span> 删除
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="am-cf">
+                <ul class="am-pagination am-pagination-centered">
+                    <li class="am-disabled"><a href="#">«</a></li>
+                    <li class="am-active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">»</a></li>
+                </ul>
+            </div>
+        </form>
+
+    </div>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/layer.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#addMajor").click(function () {
+                layer.open({
+                    type: 2,
+                    title: '添加专业',
+                    maxmin: true,
+                    shift:1,
+                    shadeClose: true, //点击遮罩关闭层
+                    area : ['400px' , '180px'],
+                    scrollbar:false,
+                    content: "/admin/addMajorFrom"
+                });
+            });
+            $(".delete").click(function(){
+                var delBtn = this;
+                layer.confirm('确认要删除吗?', {icon: 3, title:'提示'}, function(delconfirm){
+                    $.post(delBtn.href,{time:new Date().getTime()},function(result){
+                       if(result ==0){
+                            $(".mjTr" + $(delBtn).attr("alt")).remove();
+                       }else {
+                           layer.msg("删除失败!该专业已被使用");
+                       }
+                    });
+
+                    layer.close(delconfirm);
+                });
+                return false;
+            });
+
+        });
+
+    </script>
 </div>
 
 </body>

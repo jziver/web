@@ -15,7 +15,7 @@ public class CompanyNeeds implements Serializable{
     private int needNumber;
     private String SalaryRange;
     private Date validityDate;
-    private Specialities specialities;
+    private Major major;
     private boolean needStatus;
 
     public Long getId() {
@@ -66,12 +66,12 @@ public class CompanyNeeds implements Serializable{
         this.validityDate = validityDate;
     }
 
-    public Specialities getSpecialities() {
-        return specialities;
+    public Major getMajor() {
+        return major;
     }
 
-    public void setSpecialities(Specialities specialities) {
-        this.specialities = specialities;
+    public void setMajor(Major major) {
+        this.major = major;
     }
 
     public boolean isNeedStatus() {

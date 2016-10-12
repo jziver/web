@@ -11,7 +11,7 @@ public class Graduate implements Serializable{
     private String name;
     private String sex;
     private String phone;
-    private Specialities specialities;
+    private Major major;
     private String clazz; //班级
     private String remark; //备注
     private boolean jobStatus; //求职状态
@@ -48,12 +48,12 @@ public class Graduate implements Serializable{
         this.phone = phone;
     }
 
-    public Specialities getSpecialities() {
-        return specialities;
+    public Major getMajor() {
+        return major;
     }
 
-    public void setSpecialities(Specialities specialities) {
-        this.specialities = specialities;
+    public void setMajor(Major major) {
+        this.major = major;
     }
 
     public String getClazz() {

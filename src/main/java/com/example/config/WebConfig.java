@@ -26,8 +26,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public EmbeddedServletContainerCustomizer containerCustomizer(){
         return (container -> {
             ErrorPage error404 = new ErrorPage(HttpStatus.NOT_FOUND,"/404.html");
+            ErrorPage error403 = new ErrorPage(HttpStatus.FORBIDDEN,"/404.html");
 //            ErrorPage error500 = new ErrorPage(HttpStatus.INTERNAL_SERVER_ERROR,"/500.html");
-            container.addErrorPages(error404);
+            container.addErrorPages(error404,error403);
         });
     }
 

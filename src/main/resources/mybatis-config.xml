@@ -21,5 +21,7 @@
     <mappers>
         <mapper resource="mapper/UserMapper.xml"/>
         <mapper resource="mapper/CompanyMapper.xml"/>
+        <mapper resource="mapper/MajorMapper.xml"/>
+        <mapper resource="mapper/GraduateMapper.xml"/>
     </mappers>
 </configuration>

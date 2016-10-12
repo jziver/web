@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.GraduateMapper">
+    <resultMap id="graRM" type="Graduate">
+        <id column="id" property="id"/>
+        <result column="graduate_name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="phone" property="phone"/>
+        <result column="clazz" property="clazz"/>
+        <result column="remark" property="remark"/>
+        <result column="job_status" property="jobStatus"/>
+    </resultMap>
+    <resultMap id="gra_mjRM" type="Graduate" extends="graRM">
+        <association property="major" javaType="Major">
+            <id property="id" column="mid"/>
+            <result property="name" column="major_name"/>
+        </association>
+    </resultMap>
+
+    <select id="findAll" resultMap="gra_mjRM">
+        SELECT g.id,g.graduate_name,g.sex,g.phone,g.clazz,g.remark,g.job_status,m.id as mid,m.major_name
+        FROM graduate g
+        LEFT JOIN major m on g.mj_id = m.id
+    </select>
+
+</mapper>

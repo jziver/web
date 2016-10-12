@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 专业.
  */
-public class Specialities implements Serializable{
+public class Major implements Serializable{
     private static final long serialVersionUID = 4236356365713921301L;
     private Long id;
     private String name;
