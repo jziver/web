@@ -17,4 +17,6 @@ public interface UserMapper {
     void insertGraduateRole(String username);
 
     List<User> findAll();
+
+    void insertAdminRole(String username);
 }

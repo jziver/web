@@ -1,5 +1,7 @@
 package com.example.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.io.Serializable;
 
 /**
@@ -8,6 +10,7 @@ import java.io.Serializable;
 public class Major implements Serializable{
     private static final long serialVersionUID = 4236356365713921301L;
     private Long id;
+    @NotEmpty
     private String name;
 
     public Long getId() {

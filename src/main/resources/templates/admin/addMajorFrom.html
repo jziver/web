@@ -7,9 +7,9 @@
 </head>
 <body>
 <div class="am-container">
-    <form class="am-form am-form-horizontal" id="mjFrom" th:action="@{/admin/addMajor}">
+    <form class="am-form am-form-horizontal" id="mjFrom" >
         <br/>
-        <input type="text" name="name" value="" placeholder="专业名称"/>
+        <input id="mj_name" type="text" name="name" value="" placeholder="专业名称"/>
         <br/>
         <a id="submitFrom" href="javascript:;" class="am-btn am-btn-primary am-fl">提交</a>
         <a id="closeIframe" class="am-btn am-btn-default am-fr" href="javascript:;">取消</a>
@@ -24,7 +24,14 @@
         parent.layer.close(closeIframe);
     });
     $("#submitFrom").click(function () {
-        $("#mjFrom").submit();
+        $.post("/admin/addMajor",{time:new Date().getTime(),name:$("#mj_name").val()},function(result){
+           if(result == 0){
+               parent.layer.msg("添加成功");
+           }else {
+               parent.layer.msg("添加失败");
+           }
+            parent.layer.close(closeIframe);
+        });
     });
 </script>
 </body>

@@ -25,4 +25,8 @@
         LEFT JOIN major m on g.mj_id = m.id
     </select>
 
+    <insert id="insert">
+        INSERT INTO graduate(id,graduate_name,sex,phone,clazz,remark,job_status,mj_id)
+        VALUES (#{id},#{name},#{sex},#{phone},#{clazz},#{remark},#{jobStatus},#{major.id})
+    </insert>
 </mapper>

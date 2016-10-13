@@ -27,7 +27,7 @@ public class UserService {
     public void addAdminUser(User user){
         user.setCreateTime(new Date());
         userMapper.insertUser(user);
-        userMapper.insertGraduateRole(user.getUsername());
+        userMapper.insertAdminRole(user.getUsername());
     }
 
     @Transactional(readOnly = true)

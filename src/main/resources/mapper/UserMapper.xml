@@ -40,10 +40,14 @@
     </select>
 
     <insert id="insertUser">
-        INSERT INTO users(username,password)
-        VALUES (#{username},#{password})
+        INSERT INTO users(username,password,create_time)
+        VALUES (#{username},#{password},#{createTime})
     </insert>
 
+    <insert id="insertAdminRole" parameterType="java.lang.String">
+        INSERT INTO user_role(user_id,role_id)
+        VALUES ((SELECT u.id FROM users u WHERE u.username=#{username}),'2')
+    </insert>
     <insert id="insertCompanyRole" parameterType="java.lang.String">
         INSERT INTO user_role(user_id,role_id)
         VALUES ((SELECT u.id FROM users u WHERE u.username=#{username}),'3')
@@ -53,5 +57,6 @@
         INSERT INTO user_role(user_id,role_id)
         VALUES ((SELECT u.id FROM users u WHERE u.username=#{username}),'4')
     </insert>
+
 
 </mapper>

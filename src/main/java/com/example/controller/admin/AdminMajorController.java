@@ -5,10 +5,13 @@ import com.example.service.MajorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -34,9 +37,16 @@ public class AdminMajorController {
     }
 
     @RequestMapping(value = "addMajor", method = RequestMethod.POST)
-    public String addMajor(Major major) {
-        majorService.insert(major);
-        return "";
+    public @ResponseBody String addMajor(@Valid Major major, Errors errors) {
+        try {
+            if(errors.hasErrors()){
+                return "1";
+            }
+            majorService.insert(major);
+        }catch (Exception e){
+            return "1";
+        }
+        return "0";
     }
 
     @RequestMapping(value = "delMj/{id}", method = RequestMethod.POST)
