@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.mapper.GraduateMapper;
 import com.example.model.Graduate;
+import com.example.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,13 @@ public class GraduateService {
         return graduateMapper.findAll();
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public void insert(Graduate graduate) {
         graduateMapper.insert(graduate);
+    }
+
+    @Transactional(readOnly = true)
+    public Graduate findByUserId(Long id) {
+        return graduateMapper.findByUserId(id);
     }
 }

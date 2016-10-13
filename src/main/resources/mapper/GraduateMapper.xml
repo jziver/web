@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.GraduateMapper">
-    <resultMap id="graRM" type="Graduate">
+    <resultMap id="graRm" type="Graduate">
         <id column="id" property="id"/>
         <result column="graduate_name" property="name"/>
         <result column="sex" property="sex"/>
@@ -12,21 +12,37 @@
         <result column="remark" property="remark"/>
         <result column="job_status" property="jobStatus"/>
     </resultMap>
-    <resultMap id="gra_mjRM" type="Graduate" extends="graRM">
+    <resultMap id="mj_graRm" type="Graduate" extends="graRm">
         <association property="major" javaType="Major">
             <id property="id" column="mid"/>
             <result property="name" column="major_name"/>
         </association>
     </resultMap>
+    <resultMap id="user_mj_graRM" type="Graduate" extends="mj_graRm">
+        <association property="user" javaType="User">
+            <id property="id" column="uid"/>
+            <result property="username" column="username"/>
+            <result property="password" column="password"/>
+        </association>
+    </resultMap>
 
-    <select id="findAll" resultMap="gra_mjRM">
+    <select id="findAll" resultMap="user_mj_graRM">
+        SELECT g.id,g.graduate_name,g.sex,g.phone,g.clazz,g.remark,g.job_status,m.id as mid,m.major_name,u.id as uid,u.username
+        FROM graduate g
+        LEFT JOIN major m ON g.mj_id = m.id
+        LEFT JOIN users u ON g.user_id = u.id
+    </select>
+
+    <select id="findByUserId" resultMap="mj_graRm">
         SELECT g.id,g.graduate_name,g.sex,g.phone,g.clazz,g.remark,g.job_status,m.id as mid,m.major_name
         FROM graduate g
-        LEFT JOIN major m on g.mj_id = m.id
+        LEFT JOIN major m
+        ON g.mj_id = m.id
+        WHERE user_id = #{id}
     </select>
 
     <insert id="insert">
-        INSERT INTO graduate(id,graduate_name,sex,phone,clazz,remark,job_status,mj_id)
-        VALUES (#{id},#{name},#{sex},#{phone},#{clazz},#{remark},#{jobStatus},#{major.id})
+        INSERT INTO graduate(id,graduate_name,sex,phone,clazz,remark,job_status,mj_id,user_id)
+        VALUES (#{id},#{name},#{sex},#{phone},#{clazz},#{remark},#{jobStatus},#{major.id},#{user.id})
     </insert>
 </mapper>

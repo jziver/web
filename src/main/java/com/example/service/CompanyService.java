@@ -28,4 +28,8 @@ public class CompanyService {
         return companyMapper.findAll();
     }
 
+    @Transactional(readOnly = true)
+    public Company findByUserId(Long id) {
+        return companyMapper.findByUserId(id);
+    }
 }

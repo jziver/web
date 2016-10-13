@@ -16,22 +16,39 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Transactional(readOnly = true)
+    public List<User> findAll() {
+        return userMapper.findAll();
+    }
+
     @Transactional
-    public void addCompanyUser(User user){
+    public void addCompanyUser(User user) {
         user.setCreateTime(new Date());
         userMapper.insertUser(user);
         userMapper.insertCompanyRole(user.getUsername());
     }
 
     @Transactional
-    public void addAdminUser(User user){
+    public void addAdminUser(User user) {
         user.setCreateTime(new Date());
         userMapper.insertUser(user);
         userMapper.insertAdminRole(user.getUsername());
     }
 
-    @Transactional(readOnly = true)
-    public List<User> findAll() {
-        return userMapper.findAll();
+
+    @Transactional
+    public void addGraduateUser(User user) {
+        user.setCreateTime(new Date());
+        userMapper.insertUser(user);
+        userMapper.insertGraduateRole(user.getUsername());
+    }
+
+    @Transactional
+    public void delUser(Integer id) {
+
+    }
+
+    public User findByUsername(String username) {
+        return userMapper.findByUserName(username);
     }
 }

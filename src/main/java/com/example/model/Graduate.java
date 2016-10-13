@@ -1,5 +1,7 @@
 package com.example.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.io.Serializable;
 
 /**
@@ -8,13 +10,17 @@ import java.io.Serializable;
 public class Graduate implements Serializable{
     private static final long serialVersionUID = 5270477921528347379L;
     private Long id;
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String sex;
+    @NotEmpty
     private String phone;
     private Major major;
     private String clazz; //班级
     private String remark; //备注
     private boolean jobStatus; //求职状态
+    private User user;
 
     public Long getId() {
         return id;
@@ -78,5 +84,28 @@ public class Graduate implements Serializable{
 
     public void setJobStatus(boolean jobStatus) {
         this.jobStatus = jobStatus;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Graduate{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", phone='" + phone + '\'' +
+                ", major=" + major +
+                ", clazz='" + clazz + '\'' +
+                ", remark='" + remark + '\'' +
+                ", jobStatus=" + jobStatus +
+                ", user=" + user +
+                '}';
     }
 }

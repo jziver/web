@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -30,18 +31,19 @@ public class AdminCompanyController {
 
     @RequestMapping(value = "/companyManager", method = RequestMethod.GET)
     public String companyManager(Model model) {
-        model.addAttribute("coms", companyService.findAll());
+        List<Company> companyList = companyService.findAll();
+        model.addAttribute("coms", companyList);
         model.addAttribute("page", "#" + "coms");
         return "admin/home";
     }
 
 
     @RequestMapping(value = "/addCompany", method = RequestMethod.POST)
-    public String addCompany(@Valid User user, Errors userErrors, Company company) {
-        if (userErrors.hasErrors()) {
+    public String addCompany(@Valid  Company company, Errors errors) {
+        if (errors.hasErrors()) {
             return "redirect:/admin/addUser";
         }
-        userService.addCompanyUser(user);
+        userService.addCompanyUser(company.getUser());
         companyService.insertCompany(company);
         return "redirect:/admin/userList";
     }

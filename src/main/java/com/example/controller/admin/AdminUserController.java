@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -48,6 +49,13 @@ public class AdminUserController {
         }
         userService.addAdminUser(user);
         return "redirect:/admin/userList";
+    }
+
+
+    @RequestMapping(value = "/delUser/{id}",method = RequestMethod.POST)
+    public String delUser(@PathVariable Integer id){
+        userService.delUser(id);
+        return "";
     }
 
 }

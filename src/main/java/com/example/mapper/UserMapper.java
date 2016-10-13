@@ -10,7 +10,7 @@ public interface UserMapper {
 
     User findByUserName(String username);
 
-    void insertUser(User user);
+    int insertUser(User user);
 
     void insertCompanyRole(String username);
 

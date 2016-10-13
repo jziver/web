@@ -39,7 +39,7 @@
         LEFT JOIN roles r ON ur.role_id = r.rid
     </select>
 
-    <insert id="insertUser">
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO users(username,password,create_time)
         VALUES (#{username},#{password},#{createTime})
     </insert>

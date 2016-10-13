@@ -18,6 +18,8 @@ public class Company implements Serializable {
     @NotEmpty
     private String telephone;
 
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -50,6 +52,14 @@ public class Company implements Serializable {
         this.companyname = companyname;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Company{" +
@@ -57,6 +67,7 @@ public class Company implements Serializable {
                 ", address='" + address + '\'' +
                 ", companyname='" + companyname + '\'' +
                 ", telephone='" + telephone + '\'' +
+                ", user=" + user +
                 '}';
     }
 }

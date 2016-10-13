@@ -26,6 +26,7 @@ public class User implements UserDetails {
     @Size(min = 6,max = 18,message = "密码为6~18任意字符")
     private String password;
 
+
     private Date createTime;
 
     private List<Role> roles;

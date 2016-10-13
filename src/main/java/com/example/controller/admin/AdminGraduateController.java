@@ -20,27 +20,34 @@ public class AdminGraduateController {
 
     private GraduateService graduateService;
     private UserService userService;
+
     @Autowired
-    public AdminGraduateController(GraduateService graduateService,UserService userService) {
+    public AdminGraduateController(GraduateService graduateService, UserService userService) {
         this.graduateService = graduateService;
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/addGdeUser",method = RequestMethod.POST)
-    public String addGdeUser(@Valid User user, Errors errors, Graduate graduate){
+    @RequestMapping(value = "/addGdeUser", method = RequestMethod.POST)
+    public String addGdeUser(@Valid Graduate graduate, Errors errors) {
         if (errors.hasErrors()) {
             return "redirect:/admin/addUser";
         }
-        userService.addCompanyUser(user);
-        graduateService.insert(graduate);
+        try{
+            synchronized (this) {
+                userService.addGraduateUser(graduate.getUser());
+                graduateService.insert(graduate);
+            }
+        }catch (Exception e){
+            return "redirect:/admin/addUser";
+        }
         return "redirect:/admin/userList";
     }
 
 
-    @RequestMapping(value = "/graduateList",method = RequestMethod.GET)
-    public String graduateList(Model model){
-        model.addAttribute("gdList",graduateService.findAll());
-        model.addAttribute("page","#" + "graduateList");
+    @RequestMapping(value = "/graduateList", method = RequestMethod.GET)
+    public String graduateList(Model model) {
+        model.addAttribute("gdList", graduateService.findAll());
+        model.addAttribute("page", "#" + "graduateList");
         return "admin/home";
     }
 }

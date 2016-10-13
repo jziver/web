@@ -10,15 +10,29 @@
         <result column="address" property="address"/>
         <result column="telephone" property="telephone"/>
     </resultMap>
+    <resultMap id="comUserRM" type="Company" extends="companyRM">
+        <association property="user" javaType="User">
+            <id column="uid" property="id"/>
+            <result column="username" property="username"/>
+            <result column="password" property="password"/>
+        </association>
+    </resultMap>
 
+    <select id="findAll" resultMap="comUserRM">
+        SELECT c.id,c.company_name,c.address,c.telephone,u.id as uid,u.username
+        FROM company c
+        LEFT JOIN users u ON u.id = c.user_id
+    </select>
 
-    <select id="findAll" resultMap="companyRM">
-    SELECT * FROM company
-</select>
+    <select id="findByUserId" resultMap="comUserRM">
+        SELECT *
+        FROM company
+        WHERE user_id = #{id}
+    </select>
 
-    <insert id="insertCompany" >
-        INSERT INTO company(company_name,address,telephone)
-        VALUES(#{companyname},#{address},#{telephone})
+    <insert id="insertCompany">
+        INSERT INTO company(company_name,address,telephone,user_id)
+        VALUES(#{companyname},#{address},#{telephone},#{user.id})
     </insert>
 
 
