@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.PositionMapper">
+    <resultMap id="positionRM" type="position">
+        <id property="id" column="id"/>
+        <result property="positionName" column="position_name"/>
+        <result property="marjorId" column="mj_id"/>
+    </resultMap>
+
+    <insert id="insert">
+        INSERT INTO positions(position_name,mj_id)
+        VALUES (#{positionName},#{marjorId})
+    </insert>
+
+</mapper>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/amazeui.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mystyle.css}"/>
+</head>
+<body>
+<div class="am-container">
+    <br/>
+    <form  class="am-form" method="post" id="comFrom">
+        <label for="username">帐号:</label>
+        <input type="text" name="user.username" id="username" value="" placeholder="登录帐号(6~12位字母数字下划线组成)"/>
+        <br/>
+        <label for="password">密码:</label>
+        <input type="password" name="user.password" id="password" value="" placeholder="密码(6~12位任意字符)"/>
+        <br/>
+        <label for="eq_password">确认密码:</label>
+        <input type="password"  id="eq_password" value="" placeholder="与密码一致"/>
+        <br/>
+        <label for="name">毕业生姓名:</label>
+        <input type="text" name="name" id="name" value="" placeholder="请输入毕业生姓名"/>
+        <br/>
+        <label>毕业生性别:</label>
+        <br/>
+        <input type="radio"  checked="checked" name="sex" value="男" data-am-ucheck=""/> 男
+        <input type="radio" name="sex" value="女" data-am-ucheck=""/> 女
+        <br/>
+        <label for="major">专业:</label>
+        <select id="major" data-am-selected="{searchBox: 1,maxHeight: 135}" name="major.id">
+            <!-- dropUp: 1 向上下拉框 -->
+            <option  th:each="mj : ${majors}" th:value="${mj.id}" th:text="${mj.name}"></option>
+        </select>
+        <br/>
+        <label for="clazz">班级:</label>
+        <input type="text" name="clazz" id="clazz" value="" placeholder="请输入毕业生的班级"/>
+        <br/>
+        <label for="phone">手机号:</label>
+        <input type="text" name="phone" id="phone" value="" placeholder="请输入毕业生的手机号"/>
+        <br/>
+        <label for="remark">备注:</label>
+        <textarea id="remark" rows="4" name="remark"></textarea>
+        <br/>
+        <div class="am-cf">
+            <a id="submitFrom" href="javascript:;" class="am-btn am-btn-primary am-btn-sm am-fl">提交</a>
+            <a name="" class="am-btn am-btn-danger am-btn-sm am-fr" id="closeIframe">关闭</a>
+        </div>
+    </form>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/layer.js"></script>
+<script>
+    var addCom = parent.layer.getFrameIndex(window.name);
+    $('#closeIframe').click(function(){
+        parent.layer.close(addCom);
+    });
+    $("#submitFrom").click(function () {
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url:"/admin/ajaxAddGraduate",
+            data:$('#comFrom').serialize(),// 你的formid
+            async: false,
+            error: function(request) {
+                alert("Connection error");
+            },
+            success: function(data) {
+                if(data == 0){
+                    parent.layer.msg("添加成功");
+                }else {
+                    parent.layer.msg("添加失败");
+                }
+                parent.layer.close(addCom);
+            }
+        });
+    });
+</script>
+</body>
+</html>

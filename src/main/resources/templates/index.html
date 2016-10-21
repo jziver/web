@@ -4,6 +4,7 @@
 <head>
     <title>毕业生跟踪回访系统</title>
     <th:block th:include="component :: #head"></th:block>
+
 </head>
 <body>
 <th:block th:include="component :: #header">
@@ -37,7 +38,7 @@
                     <h3 class="am-panel-title">公告</h3>
                 </header>
                 <div class="am-panel-bd">
-                    欢迎您,管理员 <a href="#" sec:authentication="name"></a>
+                    欢迎您,管理员 <a href="#" sec:authentication="name"></a>&nbsp;<a class="am-text-danger" href="/logout">注销</a>
                 </div>
             </section>
         </div>
@@ -103,6 +104,7 @@
                alert(result);
                $("#gde_name").text(result.name);
            }
+
         });
     }
 </script>

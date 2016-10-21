@@ -14,4 +14,6 @@ public interface CompanyMapper {
     List<Company> findAll();
 
     Company findByUserId(Long id);
+
+    void delByUserId(Integer id);
 }

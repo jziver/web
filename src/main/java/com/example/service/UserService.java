@@ -3,6 +3,7 @@ package com.example.service;
 import com.example.mapper.UserMapper;
 import com.example.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ public class UserService {
 
     @Autowired
     private UserMapper userMapper;
+
 
     @Transactional(readOnly = true)
     public List<User> findAll() {
@@ -46,9 +48,18 @@ public class UserService {
     @Transactional
     public void delUser(Integer id) {
 
+        userMapper.delUserById(id);
     }
 
+
+    @Transactional(readOnly = true)
     public User findByUsername(String username) {
         return userMapper.findByUserName(username);
+    }
+
+    @PreAuthorize("hasRole('SU')")
+    @Transactional
+    public void delAdminUser(Integer id) {
+        userMapper.delUserById(id);
     }
 }

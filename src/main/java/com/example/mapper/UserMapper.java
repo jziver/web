@@ -19,4 +19,9 @@ public interface UserMapper {
     List<User> findAll();
 
     void insertAdminRole(String username);
+
+    void delUserById(Integer id);
+
+    void delRoleByUserId(Integer id);
+
 }

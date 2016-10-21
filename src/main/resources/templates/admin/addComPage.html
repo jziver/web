@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/amazeui.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mystyle.css}"/>
+</head>
+<body>
+<div class="am-container">
+    <br/>
+    <form  class="am-form" method="post" id="comFrom">
+        <label for="username">帐号:</label>
+        <input type="text" name="user.username" id="username" value="" placeholder="登录帐号(6~12位字母数字下划线组成)"/>
+        <br/>
+        <label for="password">密码:</label>
+        <input type="password" name="user.password" id="password" value="" placeholder="密码(6~12位任意字符)"/>
+        <br/>
+        <label for="eq_password">确认密码:</label>
+        <input type="password"  id="eq_password" value="" placeholder="与密码一致"/>
+        <br/>
+        <label for="companyname">公司名称:</label>
+        <input type="text" name="companyname" id="companyname" value="" placeholder="请输入您的公司名称"/>
+        <br/>
+        <label for="address">公司地址:</label>
+        <input type="text" name="address" id="address" value="" placeholder="请输入您公司的地址"/>
+        <br/>
+        <label for="telephone">联系电话:</label>
+        <input type="tel" name="telephone" id="telephone" value="" placeholder="请输入您公司的联系方式"/>
+        <br/>
+        <div class="am-cf">
+            <a id="submitFrom" href="javascript:;" class="am-btn am-btn-primary am-btn-sm am-fl">提交</a>
+            <a name="" class="am-btn am-btn-danger am-btn-sm am-fr" id="closeIframe">关闭</a>
+        </div>
+    </form>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/layer.js"></script>
+<script>
+    var addCom = parent.layer.getFrameIndex(window.name);
+    $('#closeIframe').click(function(){
+        parent.layer.close(addCom);
+    });
+    $("#submitFrom").click(function () {
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url:"/admin/ajaxAddCompany",
+            data:$('#comFrom').serialize(),// 你的formid
+            async: false,
+            error: function(request) {
+                alert("Connection error");
+            },
+            success: function(data) {
+                if(data == 0){
+                    parent.layer.msg("添加成功");
+                }else {
+                    parent.layer.msg("添加失败");
+                }
+                parent.layer.close(addCom);
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -12,7 +12,6 @@ public class Employment implements Serializable{
     private Date joinDate;
     private Graduate graduate;
     private Company company;
-    private Position position;
     private float salary;
     private boolean  leaveJob;
 
@@ -48,13 +47,7 @@ public class Employment implements Serializable{
         this.company = company;
     }
 
-    public Position getPosition() {
-        return position;
-    }
 
-    public void setPosition(Position position) {
-        this.position = position;
-    }
 
     public float getSalary() {
         return salary;

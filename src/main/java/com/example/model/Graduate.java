@@ -11,7 +11,7 @@ public class Graduate implements Serializable{
     private static final long serialVersionUID = 5270477921528347379L;
     private Long id;
     @NotEmpty
-    private String name;
+        private String name;
     @NotEmpty
     private String sex;
     @NotEmpty

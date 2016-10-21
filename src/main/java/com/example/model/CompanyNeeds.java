@@ -11,12 +11,12 @@ public class CompanyNeeds implements Serializable{
 
     private Long id;
     private Company company;
-    private Position position;
-    private int needNumber;
-    private String SalaryRange;
-    private Date validityDate;
-    private Major major;
-    private boolean needStatus;
+    private int needNumber; //需求人数
+    private String SalaryRange; //薪资范围
+    private Date publishDate; //发布时间
+    private Date validityDate;  //过期时间
+    private Major major;    //专业
+    private boolean needStatus; //是否招满
 
     public Long getId() {
         return id;
@@ -34,13 +34,7 @@ public class CompanyNeeds implements Serializable{
         this.company = company;
     }
 
-    public Position getPosition() {
-        return position;
-    }
 
-    public void setPosition(Position position) {
-        this.position = position;
-    }
 
     public int getNeedNumber() {
         return needNumber;
@@ -80,5 +74,13 @@ public class CompanyNeeds implements Serializable{
 
     public void setNeedStatus(boolean needStatus) {
         this.needStatus = needStatus;
+    }
+
+    public Date getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(Date publishDate) {
+        this.publishDate = publishDate;
     }
 }

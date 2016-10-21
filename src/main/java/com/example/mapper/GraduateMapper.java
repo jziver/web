@@ -12,4 +12,6 @@ public interface GraduateMapper {
     void insert(Graduate graduate);
 
     Graduate findByUserId(Long id);
+
+    void delByUserId(Integer id);
 }

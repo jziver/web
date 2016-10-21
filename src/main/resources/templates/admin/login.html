@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8"/>
     <title>登录</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="renderer" content="webkit"/>
-    <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <link rel="stylesheet" th:href="@{/css/amazeui.min.css}"/>
+    <th:block th:include="component :: #head"></th:block>
     <style>
+        body,html{
+            height:100%;
+        }
         .header {
             text-align: center;
         }
@@ -23,10 +20,21 @@
         .header p {
             font-size: 14px;
         }
+        .particles{
+            position: absolute;
+            top: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+        }
+        .am-container{
+            min-height: 100%;
+            margin-bottom: -42px;
+        }
     </style>
 </head>
 <body>
-
+<div class="am-container">
 <div class="header">
     <div class="am-g">
         <h1>Web ide</h1>
@@ -65,19 +73,18 @@
                 <button type="submit" name="" class="am-btn am-btn-default am-btn-sm am-fr">忘记密码 ^_^?</button>
             </div>
         </form>
-        <hr/>
-        <p>© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+
     </div>
 </div>
+</div>
+<div class="particles" id="particles-js">
+</div>
+<footer th:include="component :: #footer" class="footer">
+</footer>
+<script th:src="@{/js/jquery.min.js}"></script>
+<script th:src="@{/js/amazeui.min.js}"></script>
+<script th:src="@{/js/particles.min.js}"></script>
+<script th:src="@{/js/application.js}"></script>
 
-
-<script src="/js/jquery.min.js"></script>
-<script src="/js/amazeui.min.js"></script>
-<script type="text/javascript">
-    $(function () {
-
-
-    });
-</script>
 </body>
 </html>

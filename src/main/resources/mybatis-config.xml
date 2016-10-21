@@ -23,5 +23,6 @@
         <mapper resource="mapper/CompanyMapper.xml"/>
         <mapper resource="mapper/MajorMapper.xml"/>
         <mapper resource="mapper/GraduateMapper.xml"/>
+        <mapper resource="mapper/PositionMapper.xml"/>
     </mappers>
 </configuration>

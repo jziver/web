@@ -58,5 +58,11 @@
         VALUES ((SELECT u.id FROM users u WHERE u.username=#{username}),'4')
     </insert>
 
+    <delete id="delUserById">
+        DELETE FROM users WHERE id = #{id}
+    </delete>
+    <delete id="delRoleByUserId">
+        DELETE FROM user_role WHERE user_id = #{id}
+    </delete>
 
 </mapper>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/amazeui.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mystyle.css}"/>
+</head>
+<body>
+<div class="am-container">
+    <form class="am-form am-form-horizontal" id="mjFrom" >
+        <label for="name">专业名称</label>
+        <br/>
+        <input id="name" type="text" name="name" value="" placeholder="专业名称"/>
+        <br/>
+        <label for="strPositions">专业职位</label>
+        <br/>
+        <textarea id="strPositions" cols="4" name="strPositions" placeholder="该专业的职位(多个逗号隔开,如:java高级工程师,前端UI设计师)"></textarea>
+        <br/>
+        <a id="submitFrom" href="javascript:;" class="am-btn am-btn-primary am-fl">提交</a>
+        <a id="closeIframe" class="am-btn am-btn-default am-fr" href="javascript:;">取消</a>
+    </form>
+</div>
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/layer.js"></script>
+<script>
+    var closeIframe = parent.layer.getFrameIndex(window.name);
+    $('#closeIframe').click(function(){
+        parent.layer.close(closeIframe);
+    });
+    $("#submitFrom").click(function () {
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url:"/admin/addMajor",
+            data:$('#mjFrom').serialize(),// 你的formid
+            async: false,
+            error: function(request) {
+                alert("Connection error");
+            },
+            success: function(data) {
+                if(data == 0){
+                    parent.layer.msg("添加成功");
+                }else {
+                    parent.layer.msg("添加失败");
+                }
+                parent.layer.close(closeIframe);
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

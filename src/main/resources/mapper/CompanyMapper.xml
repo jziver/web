@@ -35,5 +35,9 @@
         VALUES(#{companyname},#{address},#{telephone},#{user.id})
     </insert>
 
+    <delete id="delByUserId">
+        DELETE FROM company WHERE user_id = #{id}
+    </delete>
+
 
 </mapper>

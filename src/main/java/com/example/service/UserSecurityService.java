@@ -14,8 +14,6 @@ public class UserSecurityService implements UserDetailsService{
     @Autowired
     private UserMapper userMapper;
 
-
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userMapper.findByUserName(username);
@@ -24,9 +22,5 @@ public class UserSecurityService implements UserDetailsService{
         }
         return user;
     }
-
-
-
-
 
 }

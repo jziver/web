@@ -9,14 +9,23 @@
         <result column="major_name" property="name"/>
     </resultMap>
 
-    <select id="findAll" resultMap="mjRM">
-        SELECT * from major
+    <resultMap id="mjPositionRM" type="Major" extends="mjRM">
+        <collection property="positions" ofType="Position">
+            <id column="p_id" property="id"/>
+            <result column="position_name" property="positionName"/>
+        </collection>
+    </resultMap>
+
+    <select id="findAll" resultMap="mjPositionRM">
+        SELECT m.id,m.major_name,p.id AS p_id,p.position_name FROM major m
+        LEFT JOIN positions p ON m.id = p.mj_id
     </select>
     <select id="findById" resultMap="mjRM">
-         SELECT * from major
-         WHERE id = #{id}
+        SELECT m.id,m.major_name,p.id AS p_id,p.position_name  FROM major m
+        LEFT JOIN positions p ON m.id = p.mj_id
+        WHERE id = #{id}
     </select>
-    <insert id="insert">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO major(major_name)
         VALUES (#{name})
     </insert>

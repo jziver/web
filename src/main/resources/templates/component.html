@@ -11,6 +11,19 @@
 
     <link rel="stylesheet" th:href="@{/css/amazeui.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/mystyle.css}"/>
+
+    <script th:src="@{/js/pace.js}"></script>
+    <link rel="stylesheet" th:href="@{/css/pace-theme-minimal.css}"/>
+    <style>
+        body,html{
+            height:100%;
+        }
+        .footer{
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 <div id="header">
@@ -64,6 +77,7 @@
 <div id="script">
     <script src="/js/jquery.min.js"></script>
     <script src="/js/amazeui.min.js"></script>
+    <script src="/js/layer.js"></script>
 </div>
 
 <footer id ="footer" class="footer">

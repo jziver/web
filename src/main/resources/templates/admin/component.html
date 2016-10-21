@@ -15,8 +15,14 @@
     <link rel="stylesheet" th:href="@{/css/mystyle.css}"/>
 </head>
 <body>
+<!-- 后台首页 -->
 <div id="home">
-    <span class="am-text-center">后头首页<br/>制作中...</span>
+    <div id="particles-js"></div>
+
+    <!-- scripts -->
+    <script th:src="@{js/particles.min.js}"></script>
+    <script th:src="@{/js/application.js}"></script>
+
 </div>
 
 <!-- 添加用户页面 -->
@@ -324,8 +330,7 @@
                                         <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
                                                 class="am-icon-pencil-square-o"></span> 编辑
                                         </button>
-                                        <a href="javascript:;"
-                                           class="delete am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                        <a href="javascript:;" th:href="@{'delUserById/' + ${u.roles[0].name } + '/' + ${u.id} }" class="delete am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                                 class="am-icon-trash-o"></span> 删除
                                         </a>
                                     </div>
@@ -346,9 +351,9 @@
                                             <button class="am-btn am-btn-default am-btn-xs am-text-secondary"><span
                                                     class="am-icon-pencil-square-o"></span> 编辑
                                             </button>
-                                            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
+                                            <a href="javascript:;" th:href="@{'delUserById/' + ${u.roles[0].name } + '/' + ${u.id} }" class="delete am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                                     class="am-icon-trash-o"></span> 删除
-                                            </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </td>
@@ -358,7 +363,7 @@
                     </tbody>
                 </table>
                 <div class="am-cf">
-                    <span th:text="'共' + ${#lists.size(users)} + '条记录'"></span>
+                    <span sec:authorize="hasRole('SU')" th:text="'共' + ${#lists.size(users)} + '条记录'"></span>
                     <ul class="am-pagination am-pagination-centered">
                         <li class="am-disabled"><a href="#">«</a></li>
                         <li class="am-active"><a href="#">1</a></li>
@@ -372,21 +377,35 @@
             </form>
         </div>
     </div>
-
-    <script th:src="@{/js/jquery.min.js}"></script>
-    <script th:src="@{/js/layer.js}"></script>
-    <script type="text/javascript">
-        $(function () {
-            $("#user-nav").addClass("am-in");
-            $(".delete").click(function () {
-                layer.confirm('确认要删除吗?', {icon: 3, title: '提示'}, function (delconfirm) {
-                    //do something
-
-                    layer.close(delconfirm);
+<script src="/js/jquery.min.js"></script>
+<script src="/js/layer.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#user-nav").addClass("am-in");
+        $(".delete").click(function () {
+            var url = this.href;
+            layer.confirm('确认要删除吗?', {
+                icon: 3, title: '提示', end: function (index) {
+                    setTimeout(function () {
+                        location.reload(true);
+                    },300);
+                }
+            }, function (delconfirm) {
+                $.post(url, {time: new Date().getTime()}, function (result) {
+                    if (result == 0) {
+                        layer.msg("删除成功");
+                    } else {
+                        layer.msg("删除失败!可能已被使用");
+                    }
                 });
+
+                layer.close(delconfirm);
             });
+            return false;
         });
-    </script>
+
+    });
+</script>
 </div>
 <!--公司列表页面-->
 <div id="coms">
@@ -402,7 +421,7 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
+                    <button id="addCom" type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
                 </div>
             </div>
         </div>
@@ -445,7 +464,7 @@
                                         class="am-icon-pencil-square-o"></span> 编辑
                                 </button>
 
-                                <a href="javascript:;"
+                                <a href="javascript:;" th:href="@{'delComByUserId/' + ${c.user.id}}"
                                    class="delete am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                         class="am-icon-trash-o"></span> 删除
                                 </a>
@@ -475,10 +494,41 @@
         $(function () {
             $("#company-nav").addClass("am-in");
             $(".delete").click(function () {
-                layer.confirm('确认要删除吗?', {icon: 3, title: '提示'}, function (delconfirm) {
-                    //do something
+                var url = this.href;
+                layer.confirm('确认要删除吗?', {
+                    icon: 3, title: '提示', end: function (index) {
+                        setTimeout(function () {
+                            location.reload(true);
+                        },300);
+                    }
+                }, function (delconfirm) {
+                    $.post(url, {time: new Date().getTime()}, function (result) {
+                        if (result == 0) {
+                            layer.msg("删除成功");
+                        } else {
+                            layer.msg("删除失败!可能已被使用");
+                        }
+                    });
 
                     layer.close(delconfirm);
+                });
+                return false;
+            });
+            $("#addCom").click(function () {
+                layer.open({
+                    type: 2,
+                    title: '添加企业',
+                    maxmin: true,
+                    shift: 1,
+                    //  shadeClose: true, //点击遮罩关闭层
+                    area: ['830px', '680px'],
+                    scrollbar: false,
+                    content: "/admin/addComPage",
+                    end: function (index) {
+                        setTimeout(function () {
+                            location.reload(true);
+                        },300);
+                    }
                 });
             });
         });
@@ -498,7 +548,7 @@
         <div class="am-u-sm-12 am-u-md-6">
             <div class="am-btn-toolbar">
                 <div class="am-btn-group am-btn-group-xs">
-                    <button type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
+                    <button id="addGdu" type="button" class="am-btn am-btn-default"><span class="am-icon-plus"></span> 新增</button>
                 </div>
             </div>
         </div>
@@ -548,7 +598,11 @@
                     <td th:text="${gd.major.name}"></td>
                     <td th:text="${gd.clazz}"></td>
                     <td th:text="${gd.jobStatus}"></td>
-                    <td th:text="${gd.remark}"></td>
+                    <td th:text="${#strings.abbreviate(gd.remark,11)}"></td>
+                    <!--
+                        #strings.abbreviate(object,maxsize) 限定字符串显示长度
+                        如 #strings.abbreviate("thymeleaf",8)  ====  "thyme..."
+                    -->
                     <td><a href="#" th:text="${gd.user.username}"></a></td>
                     <td>
                         <div class="am-btn-toolbar">
@@ -557,7 +611,7 @@
                                         class="am-icon-pencil-square-o"></span> 编辑
                                 </button>
 
-                                <a href="javascript:;"
+                                <a href="javascript:;" th:href="@{'delGdu/' + ${gd.user.id}}"
                                    class="delete am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span
                                         class="am-icon-trash-o"></span> 删除
                                 </a>
@@ -586,12 +640,46 @@
     <script type="text/javascript">
         $(function () {
             $(".delete").click(function () {
-                layer.confirm('确认要删除吗?', {icon: 3, title: '提示'}, function (delconfirm) {
-                    //do something
+                var url = this.href;
+                layer.confirm('确认要删除吗?', {
+                    icon: 3, title: '提示', end: function (index) {
+                        setTimeout(function () {
+                            location.reload(true);
+                        },300);
+                    }
+                }, function (delconfirm) {
+                    $.post(url, {time: new Date().getTime()}, function (result) {
+                        if (result == 0) {
+                            layer.msg("删除成功");
+                        } else {
+                            layer.msg("删除失败!可能已被使用");
+                        }
+                    });
 
                     layer.close(delconfirm);
                 });
+                return false;
             });
+
+
+            $("#addGdu").click(function () {
+                layer.open({
+                    type: 2,
+                    title: '添加企业',
+                    maxmin: true,
+                    shift: 1,
+                    //  shadeClose: true, //点击遮罩关闭层
+                    area: ['850px', '100%'],
+                    scrollbar: false,
+                    content: "/admin/addGduPage",
+                    end: function (index) {
+                        setTimeout(function () {
+                            location.reload(true);
+                        },300);
+                    }
+                });
+            });
+
         });
     </script>
 </div>
@@ -632,6 +720,7 @@
                     <th class="table-check"><input type="checkbox"/></th>
                     <th class="table-id">ID</th>
                     <th class="table-title">专业名称</th>
+                    <th>职位</th>
                     <th class="table-set">操作</th>
                 </tr>
                 </thead>
@@ -640,6 +729,16 @@
                     <td><input type="checkbox"/></td>
                     <td th:text="${mj.id}"></td>
                     <td th:text="${mj.name}"></td>
+                    <td>
+                        <th:block th:if="${#lists.size(mj.positions) le 3}" th:each="p : ${mj.positions}" th:text="${p.positionName}"></th:block>
+                        <th:block th:if="${#lists.size(mj.positions) gt 3}">
+                            <span th:text="${mj.positions[0].positionName}"></span>
+                            <span th:text="${mj.positions[1].positionName}"></span>
+                            <span th:text="${mj.positions[2].positionName}"></span>
+                            <a href="javsscript:;">...</a>
+                        </th:block>
+                    </td>
+
                     <td>
                         <div class="am-btn-toolbar">
                             <div class="am-btn-group am-btn-group-xs">
@@ -682,9 +781,9 @@
                     maxmin: true,
                     shift: 1,
                   //  shadeClose: true, //点击遮罩关闭层
-                    area: ['400px', '180px'],
+                    area: ['400px', '300px'],
                     scrollbar: false,
-                    content: "/admin/addMajorFrom",
+                    content: "/admin/addMajorPage",
                     end: function (index) {
                         setTimeout(function () {
                             location.reload(true);
@@ -705,7 +804,7 @@
                         if (result == 0) {
                             layer.msg("删除成功");
                         } else {
-                            layer.msg("删除失败!该专业已被使用");
+                            layer.msg("删除失败!可能已被使用");
                         }
                     });
 
