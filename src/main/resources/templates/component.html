@@ -12,7 +12,7 @@
     <link rel="stylesheet" th:href="@{/css/amazeui.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/mystyle.css}"/>
 
-    <script th:src="@{/js/pace.js}"></script>
+    <script th:src="@{/js/pace.min.js}"></script>
     <link rel="stylesheet" th:href="@{/css/pace-theme-minimal.css}"/>
     <style>
         body,html{
@@ -38,9 +38,9 @@
                 class="am-icon-bars"></span></button>
 
         <div class="am-collapse am-topbar-collapse" id="collapse-head">
-            <ul class="am-nav am-nav-pills am-topbar-nav">
-                <li class="am-active"><a th:href="@{/}">首页</a></li>
-                <li><a  th:href="@{/explore}">发现</a></li>
+            <ul class="am-nav am-nav-pills am-topbar-nav my-nav">
+                <li class="am-active" id="home"><a th:href="@{/}">首页</a></li>
+                <li id="explore"><a  th:href="@{/explore}">发现</a></li>
 
                 <li class="am-dropdown" data-am-dropdown="" sec:authorize="isAuthenticated()">
                     <a class="am-dropdown-toggle" data-am-dropdown-toggle="" href="javascript:;">
@@ -73,6 +73,8 @@
     </div>
 </header>
 </div>
+
+
 
 <div id="script">
     <script src="/js/jquery.min.js"></script>

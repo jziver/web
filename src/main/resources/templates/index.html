@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>毕业生跟踪回访系统</title>
+    <title>首页 毕业生跟踪回访系统</title>
     <th:block th:include="component :: #head"></th:block>
 
 </head>
@@ -91,10 +91,10 @@
     </div>
 </div>
 
-<th:block th:include="component :: #script"></th:block>
 <footer th:include="component :: #footer" class="footer">
 </footer>
 <small id="mname" type="hidden"  class="am-hide" sec:authentication="name"></small>
+<th:block th:include="component :: #script"></th:block>
 <script sec:authorize="isAuthenticated()">
     window.onload = function () {
         $.post("/findUser",{time:new Date().getTime(),username:$("#mname").text()},function (result) {

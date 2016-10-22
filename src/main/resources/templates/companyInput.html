@@ -21,9 +21,9 @@
 <div class="header">
     <div class="am-g am-text-center">
         <h1>Web ide</h1>
-        <p>Integrated Development Environment<br />代码编辑，代码生成，界面设计，调试，编译</p>
+        <p>Integrated Development Environment<br/>代码编辑，代码生成，界面设计，调试，编译</p>
     </div>
-    <hr />
+    <hr/>
 </div>
 
 <div class="am-g">
@@ -37,7 +37,7 @@
             <input type="password" name="password" id="password" value="" placeholder="密码(6~12位任意字符)"/>
             <br/>
             <label for="eq_password">确认密码:</label>
-            <input type="password"  id="eq_password" value="" placeholder="与密码一致"/>
+            <input type="password" id="eq_password" value="" placeholder="与密码一致"/>
             <br/>
             <label for="companyname">公司名称:</label>
             <input type="text" name="companyname" id="companyname" value="" placeholder="请输入您的公司名称"/>
@@ -53,13 +53,14 @@
                 <a name="" class="am-btn am-btn-danger am-btn-sm am-fr" th:href="@{/login}">已经注册?现在登录</a>
             </div>
         </form>
-        <hr/>
-        <p>© 2014 AllMobilize, Inc. Licensed under MIT license.</p>
+
     </div>
 </div>
 
 
-
+<footer th:include="component :: #footer" class="footer">
+</footer>
 <th:block th:include="component :: #script"></th:block>
+
 </body>
 </html>

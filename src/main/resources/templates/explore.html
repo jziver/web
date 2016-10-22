@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>发现 毕业生跟踪回访系统</title>
+    <th:block th:include="component :: #head"></th:block>
+</head>
+<body>
+<th:block th:include="component :: #header">
+</th:block>
+<div class="am-container" style="margin-top: 1.5em" sec:authorize="isAuthenticated()">
+    <div class="am-fr" style="width: 26%;margin-right: 1rem">
+        <div>
+            <section class="am-panel am-panel-default" id="gde">
+                <header class="am-panel-hd">
+                    <h3 class="am-panel-title">专业</h3>
+                </header>
+                <div class="am-panel-bd">
+                    <ul class="am-list">
+                        <li>a</li>
+                        <li>a</li>
+                        <li>a</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="am-fl" style="width: 70%">
+        <ul class="am-list am-list-static am-list-border">
+
+            <li>
+                <span class="am-badge">5天前</span>
+                <span class="am-badge am-badge-danger">推荐</span>
+                <div>
+                    <a>张三/zhangsan <span class="am-badge">软件开发</span></a>
+                    <p class="description">每个人都有一个死角， 自己走不出来，别人也闯不进去。
+                    </p>
+                </div>
+            </li>
+            <li>
+                <span class="am-badge">5天前</span>
+                <div>
+                    <a>张三/zhangsan <span class="am-badge">软件开发</span></a>
+                    <p class="description">每个人都有一个死角， 自己走不出来，别人也闯不进去。
+                    </p>
+                </div>
+            </li>
+
+
+        </ul>
+
+        <ul class="am-pagination am-pagination-centered">
+            <li class="am-disabled"><a href="#">&laquo;</a></li>
+            <li class="am-active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<footer th:include="component :: #footer" class="footer">
+</footer>
+<th:block th:include="component :: #script"></th:block>
+<script>
+    window.onload = function () {
+       $("#home").removeClass("am-active");
+        $("#explore").addClass("am-active");
+    }
+</script>
+</body>
+</html>
